@@ -1,0 +1,12 @@
+[Tue Sep 15 10:15:11 2015] [error] [client 127.0.0.1] File does not exist: D:/wamp/www/justcoded.dev/web/gii
+[Tue Sep 15 10:15:15 2015] [error] [client 127.0.0.1] script 'D:/wamp/www/justcoded.dev/web/gii.php' not found or unable to stat
+[Tue Sep 15 10:16:15 2015] [error] [client 127.0.0.1] script 'D:/wamp/www/justcoded.dev/web/gii.php' not found or unable to stat
+[Tue Sep 15 10:16:16 2015] [error] [client 127.0.0.1] script 'D:/wamp/www/justcoded.dev/web/gii.php' not found or unable to stat
+[Tue Sep 15 10:16:17 2015] [error] [client 127.0.0.1] script 'D:/wamp/www/justcoded.dev/web/gii.php' not found or unable to stat
+[Tue Sep 15 10:16:21 2015] [error] [client 127.0.0.1] File does not exist: D:/wamp/www/justcoded.dev/web/gii
+[Tue Sep 15 10:40:15 2015] [error] [client 127.0.0.1] File does not exist: D:/wamp/www/justcoded.dev/web/backend
+[Tue Sep 15 10:43:24 2015] [error] [client 127.0.0.1] File does not exist: D:/wamp/www/justcoded.dev/web/backend
+[Tue Sep 15 10:43:26 2015] [error] [client 127.0.0.1] File does not exist: D:/wamp/www/justcoded.dev/web/backend
+[Tue Sep 15 10:45:44 2015] [error] [client 127.0.0.1] File does not exist: D:/wamp/www/justcoded.dev/web/debug, referer: http://justcoded.dev/
+[Tue Sep 15 10:45:52 2015] [error] [client 127.0.0.1] File does not exist: D:/wamp/www/justcoded.dev/web/debug, referer: http://justcoded.dev/
+[Tue Sep 15 10:45:58 2015] [error] [client 127.0.0.1] File does not exist: D:/wamp/www/justcoded.dev/web/debug, referer: http://justcoded.dev/
