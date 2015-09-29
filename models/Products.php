@@ -14,10 +14,13 @@ use Yii;
  *
  * @property ProductPictures[] $productPictures
  * @property ProductsCategories[] $productsCategories
+ * @property Categories[] $categories
+ * @property Sales[] $sales
  * @property ProductsSales[] $productsSales
  */
 class Products extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
@@ -75,4 +78,21 @@ class Products extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProductsSales::className(), ['product_id' => 'id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategories()
+    {
+        return $this->hasMany(Categories::className(), ['id' => 'category_id'])->viaTable(ProductsCategories::tableName(), ['product_id' => 'id']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSales()
+    {
+        return $this->hasMany(Sales::className(), ['id' => 'sale_id'])->viaTable(ProductsSales::tableName(), ['product_id' => 'id']);
+    }
+
 }

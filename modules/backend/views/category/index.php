@@ -26,8 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'title',
-            'parent_id',
+            'name',
+            'lft',
+            'rgt',
+            'depth',
+            // 'tree',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

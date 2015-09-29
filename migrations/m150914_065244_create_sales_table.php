@@ -12,7 +12,7 @@ class m150914_065244_create_sales_table extends Migration
         $this->createTable('sales', [
             'id' => Schema::TYPE_PK,
             'title' => Schema::TYPE_STRING . '(100) NOT NULL',
-            'discount' => Schema::TYPE_INTEGER . '(3)  NOT NULL',
+            'discount' => Schema::TYPE_DECIMAL . '(12,4) DEFAULT 0.0',
             'quantity' => Schema::TYPE_INTEGER .  ' DEFAULT 0',
         ]);
 

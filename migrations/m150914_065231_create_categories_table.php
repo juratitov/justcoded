@@ -11,8 +11,10 @@ class m150914_065231_create_categories_table extends Migration
     {
         $this->createTable('categories', [
             'id' => Schema::TYPE_PK,
-            'title' => Schema::TYPE_STRING . '(100) NOT NULL',
-            'parent_id' => Schema::TYPE_INTEGER . ' DEFAULT 0',
+            'name' => Schema::TYPE_STRING . '(100) NOT NULL',
+            'lft' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'rgt' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'depth' => Schema::TYPE_INTEGER . ' NOT NULL',
         ]);
 
         $this->createTable('products_categories', [

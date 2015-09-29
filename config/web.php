@@ -8,7 +8,7 @@ $config = [
     'bootstrap' => ['log', 'gii'],
     'defaultRoute' => 'backend/default',
     'modules' => [
-        'gii' => ['class' => 'yii\gii\Module'],
+        //'gii' => ['class' => 'yii\gii\Module'],
         'backend' => [
             'class' => 'app\modules\backend\Module',
         ],
@@ -20,6 +20,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'rLWmK9h_cnqpa3SWmV-gRiSkSbaTOm6r',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -53,9 +56,14 @@ $config = [
             'enableStrictParsing' => false,
             'showScriptName' => false,
             'rules' => [
+                [
+                    'class' => yii\rest\UrlRule::className(), 'controller' => 'api/product',
+                    'extraPatterns' => [
+                        'GET get-product-details' => 'get-product-details'
+                    ],
+                ],
             ],
         ],
-
     ],
     'params' => $params,
 ];

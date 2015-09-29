@@ -3,13 +3,16 @@
 namespace app\models;
 
 use Yii;
+use creocoder\nestedsets\NestedSetsBehavior;
 
 /**
  * This is the model class for table "categories".
  *
  * @property integer $id
- * @property string $title
- * @property integer $parent_id
+ * @property string $name
+ * @property integer $lft
+ * @property integer $rgt
+ * @property integer $depth
  *
  * @property ProductsCategories[] $productsCategories
  */
@@ -29,9 +32,9 @@ class Categories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required'],
-            [['parent_id'], 'integer'],
-            [['title'], 'string', 'max' => 100],
+            [['name'], 'required'],
+            [['lft', 'rgt', 'depth'], 'integer'],
+            [['name'], 'string', 'max' => 100],
         ];
     }
 
@@ -42,9 +45,35 @@ class Categories extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'parent_id' => 'Parent ID',
+            'name' => 'Name',
+            'lft' => 'Lft',
+            'rgt' => 'Rgt',
+            'depth' => 'Depth',
         ];
+    }
+
+    public function behaviors() {
+        return [
+            'tree' => [
+                'class' => NestedSetsBehavior::className(),
+                'treeAttribute' => 'tree',
+//                 'leftAttribute' => 'lft',
+//                 'rightAttribute' => 'rgt',
+//                 'depthAttribute' => 'depth',
+            ],
+        ];
+    }
+
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_ALL,
+        ];
+    }
+
+    public static function find()
+    {
+        return new CategoryQuery(get_called_class());
     }
 
     /**
