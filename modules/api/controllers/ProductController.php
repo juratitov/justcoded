@@ -2,15 +2,15 @@
 
 namespace app\modules\api\controllers;
 
-use yii\web\Controller;
-
-class ProductController extends Controller
+class ProductController extends \yii\rest\ActiveController
 {
 
-    public $modelClass = 'app\models\Product';
+    public $modelClass = 'app\models\Products';
 
-    public function actionGetProductDetails()
+    public function actionIndex()
     {
+        var_dump([]); exit();
+        
         $data = [];
 
         $products = \app\models\Products::find()->all();

@@ -8,12 +8,14 @@ use app\models\ProductPicturesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ProductPictureController implements the CRUD actions for ProductPictures model.
  */
 class ProductPictureController extends Controller
 {
+
     public function behaviors()
     {
         return [
@@ -36,8 +38,8 @@ class ProductPictureController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -49,7 +51,7 @@ class ProductPictureController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -61,12 +63,20 @@ class ProductPictureController extends Controller
     public function actionCreate()
     {
         $model = new ProductPictures();
+        $model->setScenario(ProductPictures::SCENARIO_CREATE);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            $model->file = $model->imageFile->baseName . '.' . $model->imageFile->extension;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->save() && $model->upload()) {
+                \Yii::$app->getSession()->setFlash('success', 'Picture was uploaded and saved.');
+            } else {
+                \Yii::$app->getSession()->setFlash('error', 'Picture was not uploaded.');
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }
@@ -80,12 +90,24 @@ class ProductPictureController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->setScenario(ProductPictures::SCENARIO_UPDATE);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->imageFile) {
+                $model->deleteImage();
+                $model->file = $model->imageFile->baseName . '.' . $model->imageFile->extension;
+            }
+            if ($model->save() && ($model->imageFile ? $model->upload() : true)) {
+                \Yii::$app->getSession()->setFlash('success', 'Picture was uploaded and saved.');
+            } else {
+                \Yii::$app->getSession()->setFlash('error', 'Picture was not uploaded.');
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }
@@ -118,4 +140,5 @@ class ProductPictureController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

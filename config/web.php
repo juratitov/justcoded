@@ -59,7 +59,7 @@ $config = [
                 [
                     'class' => yii\rest\UrlRule::className(), 'controller' => 'api/product',
                     'extraPatterns' => [
-                        'GET get-product-details' => 'get-product-details'
+                        'GET index' => 'index'
                     ],
                 ],
             ],

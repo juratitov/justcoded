@@ -94,5 +94,22 @@ class Products extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Sales::className(), ['id' => 'sale_id'])->viaTable(ProductsSales::tableName(), ['product_id' => 'id']);
     }
+    
+    public function fields()
+    {
+        $fields = parent::fields();
+        $fields['pictures'] = 'productPictures';
+        
+        return $fields;
+    }
 
+    /**
+     * 
+     * @return type
+     */
+    public function extraFields()
+    {
+        return ['sales', 'categories', 'pictures' => 'productPictures'];
+    }
+    
 }
