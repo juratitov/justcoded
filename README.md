@@ -14,11 +14,11 @@
 
 
 API url:
-http://<host>/api/products?expand=sales,categories,pictures
+http://YOUR_HOST/api/products?expand=sales,categories,pictures
 
 or
 
-curl -i -H "Accept:application/json" "http://<host>/api/product?expand=sales,categories,pictures
+curl -i -H "Accept:application/json" "http://YOUR_HOST/api/product?expand=sales,categories,pictures
 
 
 Create folder "uploads/" in web root 
